@@ -1,20 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
-  root: {
-    maxWidth: '100%'
-  },
   media: {
-    height: 0,
-    paddingTop: '56.25%',
+    height: 260,
     backgroundSize: 'contain'
-  },
-  cardActions: {
-    display: 'flex',
-    justifyContent: 'flex-end'
   },
   cardContent: {
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  cardActions: {
+    justifyContent: 'space-between',
+    paddingBottom: '5%'
+  },
+  quantityControl: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  quantity: {
+    padding: '0 15px'
   }
 }));
