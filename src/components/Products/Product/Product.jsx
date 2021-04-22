@@ -11,8 +11,17 @@ import { AddShoppingCart } from '@material-ui/icons';
 
 import useStyles from './styles';
 
-const Product = ({ product: { name, description, price, image } }) => {
-  const classes = useStyles;
+const Product = ({
+  product: {
+    name,
+    description,
+    price: { formatted_with_symbol: price },
+    media: { source: image }
+  }
+}) => {
+  const classes = useStyles();
+
+  const removeHTML = str => str.replace(/(<([^>]+)>)/gi, '').trim();
 
   return (
     <Card className={classes.root}>
@@ -27,7 +36,7 @@ const Product = ({ product: { name, description, price, image } }) => {
           </Typography>
         </div>
         <Typography variant="body2" color="textSecondary">
-          {description}
+          {removeHTML(description)}
         </Typography>
       </CardContent>
 
