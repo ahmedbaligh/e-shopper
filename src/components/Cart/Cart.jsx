@@ -9,7 +9,10 @@ const Cart = ({
   cart: {
     line_items: cartItems = [],
     subtotal: { formatted_with_symbol: subtotal } = {}
-  } = {}
+  } = {},
+  updateCart,
+  removeFromCart,
+  emptyCart
 }) => {
   const classes = useStyles();
 
@@ -34,7 +37,11 @@ const Cart = ({
           <Grid container spacing={3}>
             {cartItems.map(item => (
               <Grid item xs={12} sm={4} key={item.id}>
-                <CardItem item={item} />
+                <CardItem
+                  item={item}
+                  updateCart={updateCart}
+                  removeFromCart={removeFromCart}
+                />
               </Grid>
             ))}
           </Grid>
@@ -48,10 +55,13 @@ const Cart = ({
                 type="button"
                 variant="contained"
                 color="secondary"
+                onClick={emptyCart}
               >
                 Empty Cart
               </Button>
               <Button
+                component={Link}
+                to="/checkout"
                 className={classes.checkoutButton}
                 size="large"
                 type="button"

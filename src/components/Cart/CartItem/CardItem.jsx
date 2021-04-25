@@ -14,11 +14,14 @@ import useStyles from './styles';
 
 const CardItem = ({
   item: {
+    id,
     name,
     media: { source: image },
     line_total: { formatted_with_symbol: price },
     quantity
-  } = {}
+  } = {},
+  updateCart,
+  removeFromCart
 }) => {
   const classes = useStyles();
 
@@ -32,15 +35,20 @@ const CardItem = ({
 
       <CardActions disableSpacing className={classes.cardActions}>
         <div className={classes.quantityControl}>
-          <Button size="small">
+          <Button size="small" onClick={() => updateCart(id, --quantity)}>
             <RemoveIcon />
           </Button>
           <Typography className={classes.quantity}>{quantity}</Typography>
-          <Button size="small">
+          <Button size="small" onClick={() => updateCart(id, ++quantity)}>
             <AddIcon />
           </Button>
         </div>
-        <Button type="button" variant="contained" color="secondary">
+        <Button
+          type="button"
+          variant="contained"
+          color="secondary"
+          onClick={() => removeFromCart(id)}
+        >
           Remove
         </Button>
       </CardActions>
