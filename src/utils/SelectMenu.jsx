@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const SelectMenu = ({ name, label, required, options = [] }) => (
+const SelectMenu = ({ name, label, value, required, options = [], setter }) => (
   <Grid item xs={12} sm={6}>
     <InputLabel>{label}</InputLabel>
     <Controller
@@ -11,11 +11,12 @@ const SelectMenu = ({ name, label, required, options = [] }) => (
       render={({ field }) => (
         <Select
           {...field}
-          value={field.value || ''}
+          onChange={e => setter(e.target.value)}
+          value={value}
           fullWidth
           required={required}
         >
-          {options.map(({ name, value }) => (
+          {options.map(({ value, name }) => (
             <MenuItem key={value} value={value}>
               {name}
             </MenuItem>
