@@ -48,5 +48,10 @@ export default makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  backToHome: {
+    marginTop: '30px',
+    display: 'flex',
+    justifyContent: 'flex-end'
   }
 }));

@@ -1,54 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import { Paper, Stepper, Step, StepLabel, Typography } from '@material-ui/core';
+import {
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  CssBaseline
+} from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 import useStyles from './styles';
-import ConfirmationForm from '../ConfirmationForm';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
+import OrderSummary from '../OrderSummary';
 import { commerce } from '../../../lib/commerce';
 
-const steps = ['Shipping Address', 'Payment Details', 'Confirmation'];
+const steps = ['Shipping Address', 'Payment Details'];
 
-const Checkout = ({ cartID }) => {
+const Checkout = ({ cartID, order, onOrder, error }) => {
   const classes = useStyles();
+
+  const history = useHistory();
 
   const [activeStep, setActiveStep] = useState(0);
   const [token, setToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
 
   useEffect(() => {
-    (async () => {
+    const getToken = async () => {
       try {
-        cartID &&
-          setToken(
-            await commerce.checkout.generateToken(cartID, { type: 'cart' })
-          );
+        setToken(
+          await commerce.checkout.generateToken(cartID, { type: 'cart' })
+        );
       } catch (err) {
-        console.log('Error occurred: ', err);
+        if (activeStep !== steps.length) history.push('/');
       }
-    })();
-  }, [cartID]);
+    };
 
-  const updateStep = updater => setActiveStep(prevState => prevState + updater);
+    if (cartID) getToken();
+  }, [cartID, activeStep, history]);
+
+  const updateStep = (updater = 1) =>
+    setActiveStep(prevState => prevState + updater);
 
   const nextStep = fields => {
     setShippingData(fields);
-    updateStep(1);
+    updateStep();
   };
 
   const ChooseForm = () => {
     switch (activeStep) {
       case steps.length:
-        return <ConfirmationForm />;
+        return <OrderSummary classes={classes} order={order} error={error} />;
       case 0:
         return <AddressForm token={token} nextStep={nextStep} />;
       default:
-        return <PaymentForm />;
+        return (
+          <PaymentForm
+            token={token}
+            updateStep={updateStep}
+            shippingData={shippingData}
+            onOrder={onOrder}
+          />
+        );
     }
   };
 
   return (
     <>
+      <CssBaseline />
       <div className={classes.toolbar} />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
