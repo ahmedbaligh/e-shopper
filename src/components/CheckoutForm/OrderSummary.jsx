@@ -12,18 +12,7 @@ const OrderSummary = ({
   order: { customer, customer_reference: orderReference },
   error
 }) =>
-  error ? (
-    <>
-      <Typography variant="h5">Sorry, we couldn't make your order.</Typography>
-      <Typography variant="h5">Error: {error}</Typography>
-
-      <div className={classes.backToHome}>
-        <Button variant="outlined" type="button" component={Link} to="/">
-          Back to Home
-        </Button>
-      </div>
-    </>
-  ) : customer ? (
+  customer ? (
     <>
       <div>
         <Typography>
@@ -34,6 +23,17 @@ const OrderSummary = ({
           Order reference: {orderReference}.
         </Typography>
       </div>
+
+      <div className={classes.backToHome}>
+        <Button variant="outlined" type="button" component={Link} to="/">
+          Back to Home
+        </Button>
+      </div>
+    </>
+  ) : error ? (
+    <>
+      <Typography variant="h5">Sorry, we couldn't make your order.</Typography>
+      <Typography variant="h5">Error: {error}</Typography>
 
       <div className={classes.backToHome}>
         <Button variant="outlined" type="button" component={Link} to="/">

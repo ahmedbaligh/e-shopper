@@ -34,6 +34,9 @@ const App = () => {
   const refreshCart = async () => setCart(await commerce.cart.refresh());
 
   const onOrder = async (tokenID, orderData) => {
+    setOrderError('');
+    setOrder({});
+
     try {
       console.log('Order Data: ', orderData);
       const newOrder = await commerce.checkout.capture(tokenID, orderData);
