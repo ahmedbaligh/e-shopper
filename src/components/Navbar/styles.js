@@ -15,7 +15,19 @@ export default makeStyles(theme => ({
     flexGrow: 1,
     alignItems: 'center',
     display: 'flex',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    color: 'inherit',
+    '& img': {
+      transition: 'all 0.5s ease-out',
+      paddingRight: 3
+    },
+    '&:hover': {
+      '& img': {
+        transition: 'all 0.5s ease-in',
+        transform: 'scale(1.15)'
+      }
+    },
+    width: 'max-content'
   },
   image: {
     marginRight: '10px'

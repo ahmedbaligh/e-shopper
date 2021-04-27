@@ -100,6 +100,8 @@ const AddressForm = ({ token, nextStep }) => {
             <TextInput name="address1" label="Address" />
             <TextInput name="city" label="City" />
 
+            <div className={classes.spacer} />
+
             <SelectMenu
               label="Shipping Country"
               name="shippingCountry"
@@ -123,8 +125,7 @@ const AddressForm = ({ token, nextStep }) => {
             />
           </Grid>
 
-          <br />
-          <div>
+          <div className={classes.buttonsGroup}>
             <Button variant="outlined" component={Link} to="/cart">
               Back to Cart
             </Button>
