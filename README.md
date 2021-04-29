@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# e-Shopper
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+E-commerce web application where users can browser products, add items to the cart, proceed to checkout, and pay with credit card.
 
-## Available Scripts
+## Features and Functionality
 
-In the project directory, you can run:
+- In the landing page, you can:
 
-### `yarn start`
+  - Browse all available products in the store and see their name, description, price.
+  - Add products to your shopping cart.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- In the Cart page, you can:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  - See the quantity and the total price of each product.
+  - Increase and decrease the quantity of each product.
+  - Remove each product completely.
+  - Empty the entire cart.
+  - See the total price of all of your in-cart items.
+  - Proceed to checkout.
 
-### `yarn test`
+- In the Checkout page, you can:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - Enter your personal information and shipping details.
+  - See available shipping countries, subdivisions, and options based on your in-cart combination of products and their shipping options.
+  - See a final summary of your order constituents (each of their quantities and price) and the total price after all additional fees (e.g. shipping).
+  - Enter credit card details (card number, expiry date, cvv).
+  - Get your order reference number if your purchase is successful, or otherwise, the cause of the occurring error.
 
-### `yarn build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### API Keys
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You need to get your [Commerce.js](https://commercejs.com/) API key. First, sign up for an account and then head to [your developer page](https://dashboard.chec.io/settings/developer) and copy your `Sandbox Public Key`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You also need a [Stripe](https://stripe.com/) API key. Sign up for an account, then go your [API keys page](https://dashboard.stripe.com/test/apikeys) and get your `Publishable key`.
 
-### `yarn eject`
+Create a `.env.local` file and inside it do the following:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```txt
+REACT_APP_CHEC_PUBLIC_KEY=<your_commerce.js_key>
+REACT_APP_STRIPE_PUBLIC_KEY=<your_stripe_key>
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**_Make sure to integrate Stripe with your Commerce.js account in the [Payment gateways](https://dashboard.chec.io/settings/payment) tab in your dashboard._**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Installing Dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Make sure to have [yarn](https://yarnpkg.com/getting-started/install) installed in your machine. Navigate to the root directory and run:
 
-## Learn More
+```bash
+yarn
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Running the Server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run the server, execute:
 
-### Code Splitting
+```bash
+yarn start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This will start the server on [http://127.0.0.1:3000/](http://127.0.0.1:3000/) in development mode.
 
-### Analyzing the Bundle Size
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This app is created with the help of this [JavaScript Mastery](https://www.youtube.com/channel/UCmXmlB4-HJytD7wek0Uo97A)'s awesome [tutorial](https://youtu.be/377AQ0y6LPA).
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The backend API of this app is handled through [Commerce.js](https://commercejs.com/) API. Payment handling is done using [Stripe](https://stripe.com/).
