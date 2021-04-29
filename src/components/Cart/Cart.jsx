@@ -48,7 +48,7 @@ const Cart = ({
           <div className={classes.cartDetails}>
             <Typography variant="h5">{`Subtotal: ${subtotal}`}</Typography>
 
-            <div>
+            <div className={classes.cartControls}>
               <Button
                 className={classes.emptyButton}
                 size="large"

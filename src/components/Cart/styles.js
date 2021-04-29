@@ -9,9 +9,19 @@ export default makeStyles(theme => ({
   },
   cartDetails: {
     display: 'flex',
-    marginTop: '10%',
+    margin: '10% 0 5%',
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      marginTop: '15%',
+      textAlign: 'center'
+    }
+  },
+  cartControls: {
+    [theme.breakpoints.down('xs')]: {
+      marginTop: '8%'
+    }
   },
   emptyButton: {
     minWidth: '150px',
@@ -26,6 +36,11 @@ export default makeStyles(theme => ({
     minWidth: '150px'
   },
   link: {
-    textDecoration: 'none'
+    color: 'inherit',
+    fontWeight: '700',
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#999'
+    }
   }
 }));
