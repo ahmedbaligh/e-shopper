@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Typography,
   Button,
   Card,
   CardActions,
   CardContent,
-  CardMedia
+  CardMedia,
+  CircularProgress
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+
+import { Add, DeleteRounded, Remove } from '@material-ui/icons';
 
 import useStyles from './styles';
 
@@ -25,6 +26,18 @@ const CardItem = ({
 }) => {
   const classes = useStyles();
 
+  const [itemQuantity, setItemQuantity] = useState(quantity);
+  const [loading, setLoading] = useState(false);
+
+  const updateQuantity = updater => {
+    setItemQuantity(prevQuantity => prevQuantity + updater);
+    updateCart(id, quantity + updater);
+  };
+
+  useEffect(() => {
+    setLoading(quantity === itemQuantity ? false : true);
+  }, [quantity, itemQuantity]);
+
   return (
     <Card>
       <CardMedia image={image} alt={name} className={classes.media} />
@@ -35,12 +48,22 @@ const CardItem = ({
 
       <CardActions disableSpacing className={classes.cardActions}>
         <div className={classes.quantityControl}>
-          <Button size="small" onClick={() => updateCart(id, --quantity)}>
-            <RemoveIcon />
+          <Button
+            size="small"
+            onClick={() => updateQuantity(-1)}
+            disabled={loading}
+          >
+            {quantity === 1 ? <DeleteRounded /> : <Remove />}
           </Button>
-          <Typography className={classes.quantity}>{quantity}</Typography>
-          <Button size="small" onClick={() => updateCart(id, ++quantity)}>
-            <AddIcon />
+          <Typography className={classes.quantity}>
+            {loading ? <CircularProgress size={20} /> : quantity}
+          </Typography>
+          <Button
+            size="small"
+            onClick={() => updateQuantity(1)}
+            disabled={loading}
+          >
+            <Add />
           </Button>
         </div>
         <Button
