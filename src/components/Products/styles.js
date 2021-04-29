@@ -9,5 +9,14 @@ export default makeStyles(theme => ({
   },
   root: {
     flexGrow: 1
+  },
+  spinner: {
+    display: 'flex',
+    placeContent: 'center',
+    placeItems: 'center',
+    width: 'max-content',
+    height: '70vh',
+    margin: 'auto',
+    color: '#999'
   }
 }));
